@@ -27,6 +27,7 @@ Accepts JSON in it's body and returns a name and the data stored
 ```
 
 http://192.168.99.100:8000/slide/{name}
+
 Retreives the json from the database and returns it as a json object. If the json is not valid the result is null.
 http://192.168.99.100:8000/slide/7c88b940639add4f
 
