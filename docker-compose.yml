@@ -2,7 +2,9 @@ version: '2'
 services:
   web:
     build: .
-    command: php -S 0.0.0.0:8000 -t /app
+    working_dir: /app
+    links:
+      - mariadb
     ports:
       - "8000:8000"
     volumes:
