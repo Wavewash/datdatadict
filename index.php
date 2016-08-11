@@ -13,6 +13,9 @@ $sql_create = "createdatabase.sql";
 
 $app = new \Slim\App;
 
+/**
+ * Accepts a $name which it uses to select from the mysql database and return the data
+ **/
 $app->get('/slide/{name}', function (Request $request, Response $response) {
 	global $servername, $dbname, $username, $password;
     $name = $request->getAttribute('name');
@@ -37,13 +40,15 @@ $app->get('/slide/{name}', function (Request $request, Response $response) {
 	}
 	
 	$unwrapped = json_decode($data['data']);
-	//$unwrapped['data'] = json_decode($unwrapped);
     
 	$response = $response->withJson($unwrapped, 201);
 
     return $response;
 });
 
+/**
+ * The content body is placed into the data field. A name is generated and returned on successful inserstion
+ **/
 $app->put('/createslide/', function (Request $request, Response $response, $args) {
 	global $servername, $dbname, $username, $password;
     $body = $request->getBody()->getContents();
@@ -68,6 +73,9 @@ $app->put('/createslide/', function (Request $request, Response $response, $args
     return $response;
 });
 
+/**
+ * Creates the DB
+ **/
 $app->get('/createdb/', function (Request $request, Response $response) {
 	global $servername, $dbname, $username, $password;
     try {
@@ -87,6 +95,9 @@ $app->get('/createdb/', function (Request $request, Response $response) {
 	$conn = null;
 });
 
+/**
+ * Creates the tables
+ **/
 $app->get('/createtables/', function (Request $request, Response $response) {
 	global $servername, $dbname, $username, $password, $sql_create;
     try {
