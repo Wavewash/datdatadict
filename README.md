@@ -1,6 +1,15 @@
 # dougstore
 - A simple php mysql data store
 
+make sure composer is installed in your cloned repo directory
+https://getcomposer.org/doc/00-intro.md
+There's a window msi installer
+
+cd into the repo's directory and run: 
+```
+componser install
+```
+
 install docker
 from docker console cd to the project adnd run: 
 ```
@@ -11,6 +20,8 @@ to bring the service down:
 ```
 docker compose down -d
 ```
+
+
 
 
 To create your database and tables go to these urls in a browser:  
