@@ -52,7 +52,7 @@ $app->get('/data/{name}', function (Request $request, Response $response) {
 $app->put('/create/', function (Request $request, Response $response, $args) {
 	global $servername, $dbname, $username, $password;
     $body = $request->getBody()->getContents();
-	$name = bin2hex(openssl_random_pseudo_bytes(8));
+	$name = getQueryParam("name", bin2hex(openssl_random_pseudo_bytes(8)));
     
     $data = array('name' => $name, 'data' => $body);
 	try {

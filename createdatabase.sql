@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `dict` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `data` longtext NOT NULL,
   `name` varchar(50) NOT NULL,
+  `updated` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
