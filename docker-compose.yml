@@ -2,17 +2,17 @@ version: '2'
 services:
   web:
     build: .
-    working_dir: /app
+    working_dir: /var/www/html
     links:
       - mariadb
     ports:
-      - "8000:8000"
+      - "8001:80"
     volumes:
-      - .:/app
-
+      - .:/var/www/html
+      - ./php.ini:/usr/local/etc/php/php.ini
   mariadb:
     image: mariadb
     environment:
     - MYSQL_ROOT_PASSWORD=password
     ports:
-      - "32785:3306"
+      - "3306:3306"

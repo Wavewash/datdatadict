@@ -1,4 +1,4 @@
-# dougstore
+# DAT DATA DICT(ionary)
 - A simple php mysql data store
 
 make sure composer is installed in your cloned repo directory  
@@ -11,7 +11,7 @@ componser install
 ```
 
 install docker
-from docker console cd to the project adnd run: 
+from docker console cd to the project and run: 
 ```
 docker compose up -d
 ```
@@ -43,6 +43,3 @@ Accepts JSON in it's body and returns a name and the data stored
 http://192.168.99.100:8000/slide/{name}  
 Retreives the json from the database and returns it as a json object. If the json is not valid the result is null.  
 http://192.168.99.100:8000/slide/7c88b940639add4f
-
-
-

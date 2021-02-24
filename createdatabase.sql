@@ -11,14 +11,14 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Dumping database structure for slides
--- DROP DATABASE IF EXISTS `slides`;
-CREATE DATABASE IF NOT EXISTS `slides` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `slides`;
+-- DROP DATABASE IF EXISTS `datadict`;
+CREATE DATABASE IF NOT EXISTS `datadict` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `datadict`;
 
 
 -- Dumping structure for table slides.slidedata
 -- DROP TABLE IF EXISTS `slidedata`;
-CREATE TABLE IF NOT EXISTS `slidedata` (
+CREATE TABLE IF NOT EXISTS `dict` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `data` longtext NOT NULL,
   `name` varchar(50) NOT NULL,

@@ -1,13 +1,13 @@
 {
-    "name": "mo/doug-store",
-    "description": "A simple Json Store",
+    "name": "mo/datdatadict",
+    "description": "Dat Data Dict: A simple Json Store",
     "require": {
         "slim/slim": "^3.5"
     },
     "authors": [
         {
             "name": "Mo Kakwan",
-            "email": "wavewash@yahoo.com"
+            "email": "wavewash@gmail.com"
         }
     ]
 }

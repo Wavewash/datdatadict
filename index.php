@@ -4,10 +4,10 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require 'vendor/autoload.php';
 
-$servername = "192.168.99.100:32785";
+$servername = "mariadb:3306";
 $username = "root";
 $password = "password";
-$dbname = "slides";
+$dbname = "datadict";
 
 $sql_create = "createdatabase.sql";
 
@@ -16,7 +16,7 @@ $app = new \Slim\App;
 /**
  * Accepts a $name which it uses to select from the mysql database and return the data
  **/
-$app->get('/slide/{name}', function (Request $request, Response $response) {
+$app->get('/data/{name}', function (Request $request, Response $response) {
 	global $servername, $dbname, $username, $password;
     $name = $request->getAttribute('name');
 	
@@ -49,7 +49,7 @@ $app->get('/slide/{name}', function (Request $request, Response $response) {
 /**
  * The content body is placed into the data field. A name is generated and returned on successful inserstion
  **/
-$app->put('/createslide/', function (Request $request, Response $response, $args) {
+$app->put('/create/', function (Request $request, Response $response, $args) {
 	global $servername, $dbname, $username, $password;
     $body = $request->getBody()->getContents();
 	$name = bin2hex(openssl_random_pseudo_bytes(8));
@@ -59,7 +59,7 @@ $app->put('/createslide/', function (Request $request, Response $response, $args
 		$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "INSERT INTO slidedata (name, data) VALUES ('{$name}', '{$body}')";
+		$sql = "INSERT INTO {$dbname} (name, data) VALUES ('{$name}', '{$body}')";
 		// use exec() because no results are returned
 		$conn->exec($sql);
 		$response = $response->withJson($data, 201);
@@ -78,6 +78,7 @@ $app->put('/createslide/', function (Request $request, Response $response, $args
  **/
 $app->get('/createdb/', function (Request $request, Response $response) {
 	global $servername, $dbname, $username, $password;
+	$message ="";
     try {
 	    $conn = new PDO("mysql:host=$servername", $username, $password);
 	    // set the PDO error mode to exception
@@ -86,13 +87,16 @@ $app->get('/createdb/', function (Request $request, Response $response) {
 	    // sql to create table
 	    $conn->exec("CREATE DATABASE `{$dbname}`;");
 
-	    echo "Table Database Created Successfully";
+	    $message .= "Database Created Successfully";
 	    }
 	catch(PDOException $e)
 	    {
-	    	echo "<br>" . $e->getMessage();
+	    	$message .=  $e->getMessage();
 	    }
 	$conn = null;
+
+	$response->getBody()->write($message);
+    return $response;
 });
 
 /**
@@ -110,13 +114,18 @@ $app->get('/createtables/', function (Request $request, Response $response) {
 
 	    // use exec() because no results are returned
 	    $conn->exec($sql);
-	    echo "Table Slides Created Successfully";
+	    echo "Table DataDict Created Successfully";
 	    }
 	catch(PDOException $e)
 	    {
 	    	echo "<br>" . $e->getMessage();
 	    }
 	$conn = null;
+});
+
+$app->get('/test/', function (Request $request, Response $response) {
+	$response->getBody()->write("Hello, princess");
+    return $response;
 });
 
 $app->run();
